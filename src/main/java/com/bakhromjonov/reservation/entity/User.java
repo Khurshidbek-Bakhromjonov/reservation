@@ -37,4 +37,8 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Role> roles = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    //@OnDelete(action = OnDeleteAction.CASCADE)
+    private Collection<Booking> bookings = new ArrayList<>();
 }
