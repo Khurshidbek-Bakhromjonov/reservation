@@ -1,5 +1,6 @@
 package com.bakhromjonov.reservation.service;
 
+import com.bakhromjonov.reservation.dto.UserDTO;
 import com.bakhromjonov.reservation.mapper.BookingConvert;
 import com.bakhromjonov.reservation.mapper.UserConvert;
 import com.bakhromjonov.reservation.repositorty.BookingRepository;
@@ -13,6 +14,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -25,6 +28,9 @@ public class UserService implements UserDetailsService {
     private final BookingConvert bookingConvert;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final EmailSenderService emailSenderService;
+
+
+    public List<UserDTO>
 
 
 
