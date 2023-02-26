@@ -4,6 +4,7 @@ import com.bakhromjonov.reservation.dto.BookingDTO;
 import com.bakhromjonov.reservation.dto.UserDTO;
 import com.bakhromjonov.reservation.entity.Booking;
 import com.bakhromjonov.reservation.entity.Room;
+import com.bakhromjonov.reservation.entity.User;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.mapper.BookingConvert;
 import com.bakhromjonov.reservation.repositorty.BookingRepository;
@@ -84,7 +85,7 @@ public class BookingService {
         }
     }
 
-    public UserDTO getUserByBookingId(Long id) throws NotFoundException {
+    public UserDTO getUsersByBookingId(Long id) throws NotFoundException {
         BookingDTO bookingDTO = getById(id);
         return bookingDTO.getUser();
     }
@@ -99,6 +100,13 @@ public class BookingService {
             return bookingConvert.entityToDto(booking);
         } else
             throw new NotFoundException("Room already in use");
+    }
+
+
+    public List<BookingDTO> saveBookings(List<BookingDTO> bookingDTOS) {
+        List<Booking> bookings = bookingConvert.dtoToEntity(bookingDTOS);
+        bookings = bookingRepository.saveAll(bookings);
+        return bookingConvert.entityToDto(bookings);
     }
 
     public void confirmBooking(Long id, boolean isConfirmed) throws NotFoundException {
