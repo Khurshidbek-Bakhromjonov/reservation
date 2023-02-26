@@ -82,7 +82,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@PathVariable("id") Long id,
+    public ResponseEntity<UserDTO> updateUser(@PathVariable Long id,
                                               @RequestBody UserDTO userDTO) throws NotFoundException {
         UserDTO result = userService.updateUser(id, userDTO);
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/users/{id}").toUriString());

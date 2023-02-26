@@ -30,4 +30,10 @@ public class FormClass {
         Long id;
         String name;
     }
+
+    @Data
+    public static class RoleToUserForm {
+        private String username;
+        private String roleName;
+    }
 }
