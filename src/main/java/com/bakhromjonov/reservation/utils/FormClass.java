@@ -11,4 +11,10 @@ public class FormClass {
         private String description;
         private String roomName;
     }
+
+    @Data
+    public static class RoomForm {
+        Long id;
+        String name;
+    }
 }
