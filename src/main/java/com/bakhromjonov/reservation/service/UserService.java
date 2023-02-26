@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService {
     }
 
     public UserDTO getById(Long id) throws NotFoundException {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Available"));
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Found"));
         return userConvert.entityToDto(user);
     }
 
@@ -137,8 +137,8 @@ public class UserService implements UserDetailsService {
         return ResponseEntity.ok().body("Added successfully");
     }
 
-    public ResponseEntity<String> cancelBooking(Long id, String code) {
-        User user = userRepository.getById(id);
+    public ResponseEntity<String> cancelBooking(Long id, String code) throws NotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Found"));
         Collection<Booking> bookings = user.getBookings();
         Booking booking = bookingRepository.findByCode(code);
         LocalDateTime now = LocalDateTime.now();
@@ -178,8 +178,8 @@ public class UserService implements UserDetailsService {
         return userConvert.entityToDto(users);
     }
 
-    public void deleteUser(Long id) {
-        User user = userRepository.getById(id);
+    public void deleteUser(Long id) throws NotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Found"));
         userRepository.delete(user);
     }
 
@@ -206,8 +206,8 @@ public class UserService implements UserDetailsService {
         return bookingConvert.entityToDto(bookings);
     }
 
-    public Collection<BookingDTO> getBookingsByUserId(Long id) {
-        User user = userRepository.getById(id);
+    public Collection<BookingDTO> getBookingsByUserId(Long id) throws NotFoundException {
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User Not Found"));
         Collection<Booking> bookings = user.getBookings();
         return bookingConvert.entityToDto(bookings);
     }
