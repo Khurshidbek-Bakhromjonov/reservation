@@ -13,6 +13,19 @@ public class FormClass {
     }
 
     @Data
+    public static class BookingUpdate {
+        private String dateStart;
+        private String dateEnd;
+        private String description;
+    }
+
+    @Data
+    public static class DateForm {
+        String start;
+        String end;
+    }
+
+    @Data
     public static class RoomForm {
         Long id;
         String name;
