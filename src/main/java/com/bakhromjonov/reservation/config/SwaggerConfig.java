@@ -39,7 +39,7 @@ public class SwaggerConfig {
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(Collections.singletonList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.bakhromjonov.reservation"))
+                .apis(RequestHandlerSelectors.basePackage("com.bakhromjonov"))
                 .paths(PathSelectors.any())
                 .build();
     }
