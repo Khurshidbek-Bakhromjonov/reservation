@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 @Component
 public class EmailSenderService {
 
-    @Autowired
-    private JavaMailSender javaMailSender;
+    private final JavaMailSender javaMailSender;
 
     public void sendEmail(String to, String body, String subject) {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
