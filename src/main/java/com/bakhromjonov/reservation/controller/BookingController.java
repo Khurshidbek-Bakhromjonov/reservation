@@ -4,70 +4,78 @@ import com.bakhromjonov.reservation.dto.BookingDTO;
 import com.bakhromjonov.reservation.dto.UserDTO;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.service.BookingService;
-import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/bookings")
+@RequestMapping("/api/booking")
 public class BookingController {
+    private final BookingService service;
 
-    private final BookingService bookingService;
-
-    @GetMapping
+    @GetMapping("/all")
     public List<BookingDTO> findAllBookings() {
-        return bookingService.listAll();
+        return service.listAll();
     }
 
     @GetMapping("/{id}")
     public BookingDTO findBookingById(@PathVariable Long id) throws NotFoundException {
-        return bookingService.getById(id);
+        return service.getById(id);
     }
 
-    @GetMapping("/{id}/users")
-    public ResponseEntity<UserDTO> getUsersByBookingId(@PathVariable Long id) throws NotFoundException {
-        return ResponseEntity.ok().body(bookingService.getUsersByBookingId(id));
+    @GetMapping("/{id}/user")
+    public ResponseEntity<UserDTO> GetUserByBookId(@PathVariable Long id) throws NotFoundException {
+        return ResponseEntity.ok().body(service.getUsersByBookingId(id));
     }
 
-    @GetMapping("/{code}")
+    @GetMapping("/findCODE/{code}")
     public BookingDTO findBookingByCode(@PathVariable String code) {
-        return bookingService.getBookingByCode(code);
+        return service.getBookingByCode(code);
     }
 
-    @PostMapping
+    @PostMapping("/save")
     public BookingDTO addBooking(@Valid @RequestBody BookingDTO bookingDTO) throws NotFoundException {
-        return bookingService.save(bookingDTO);
+        return service.save(bookingDTO);
     }
 
-    @GetMapping("/rooms")
-    public ResponseEntity<Collection<BookingDTO>> fetchBookingsByRoomName(@RequestBody String name) throws NotFoundException {
-        return ResponseEntity.ok().body(bookingService.getAllByRoomName(name));
+    @GetMapping("/all/room")
+    public ResponseEntity<Collection<BookingDTO>> FetchBookingsByRoomName(@RequestBody String name) throws NotFoundException {
+
+        return ResponseEntity.ok().body(service.getAllByRoomName(name));
     }
 
-    @GetMapping("/next-booking")
-    public ResponseEntity<String> getNextBooking() {
-        return ResponseEntity.ok().body(bookingService.nextBooking());
+
+    @GetMapping("/next")
+    public ResponseEntity<String> getNextBooking() throws NotFoundException {
+        return ResponseEntity.ok().body(service.nextBooking());
     }
 
-    @PostMapping
+    @PostMapping("/save/all")
     public List<BookingDTO> addBookings(@RequestBody List<BookingDTO> bookingDTOS) {
-        return bookingService.saveBookings(bookingDTOS);
+        return service.saveDepartments(bookingDTOS);
     }
 
     @PostMapping("/confirm/{id}")
     public ResponseEntity<String> confirmBooking(@RequestBody boolean confirmed, @PathVariable Long id) throws NotFoundException {
-        bookingService.confirmBooking(id, confirmed);
-        return confirmed ? ResponseEntity.ok().body("confirmed") : ResponseEntity.ok().body("not confirmed");
+        service.confirmBooking(id, confirmed);
+        if (confirmed)
+            return ResponseEntity.ok().body("confirmed");
+        else {
+            return ResponseEntity.ok().body("not confirmed!");
+
+        }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBooking(@PathVariable Long id) throws NotFoundException {
-        return ResponseEntity.ok().body(bookingService.deleteBooking(id));
+        return ResponseEntity.ok().body(service.deleteBooking(id));
     }
+
+
 }

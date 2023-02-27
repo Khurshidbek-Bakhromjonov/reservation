@@ -10,61 +10,67 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/departments")
+@RequestMapping("/api/department")
 public class DepartmentController {
+    private final
+    DepartmentService service;
 
-    private final DepartmentService departmentService;
 
-
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<DepartmentDTO>> findAllDepartments() {
-        return ResponseEntity.ok().body(departmentService.listAll());
+        return ResponseEntity.ok().body(service.listAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<DepartmentDTO> findDepartmentById(@PathVariable Long id) throws NotFoundException {
-        return ResponseEntity.ok().body(departmentService.getById(id));
+        return ResponseEntity.ok().body(service.getById(id));
     }
 
     @GetMapping("/{id}/rooms")
-    public ResponseEntity<Collection<RoomDTO>> fetchRoomsByDepartment(@PathVariable Long id) throws NotFoundException {
-        return ResponseEntity.ok().body(departmentService.roomsByDepartmentId(id));
+    public ResponseEntity<Collection<RoomDTO>> FetchRoomsByIdDepartment(@PathVariable Long id) throws NotFoundException {
+        return ResponseEntity.ok().body(service.roomsByDepartmentId(id));
     }
 
-    @GetMapping("/{name}")
+
+    @GetMapping("/findNAME/{name}")
     public ResponseEntity<DepartmentDTO> findDepartmentByName(@PathVariable String name) throws NotFoundException {
-        return ResponseEntity.ok().body(departmentService.getDepartmentByName(name));
+
+        return ResponseEntity.ok().body(service.getDepartmentByName(name));
     }
 
-    @PostMapping
-    public ResponseEntity<DepartmentDTO> addDepartment(@RequestBody DepartmentDTO departmentDTO) {
-        DepartmentDTO result = departmentService.save(departmentDTO);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/departments").toUriString());
+    @PostMapping("/save")
+    public ResponseEntity<DepartmentDTO> CreateDepartment(@RequestBody DepartmentDTO departmentDTO) throws URISyntaxException {
+        DepartmentDTO result = service.save(departmentDTO);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/department/save").toUriString());
         return ResponseEntity.created(uri).body(result);
     }
 
-    @PostMapping
+    @PostMapping("/save/all")
     public ResponseEntity<List<DepartmentDTO>> addDepartments(@RequestBody List<DepartmentDTO> departmentDTOS) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/departments").toUriString());
-        return ResponseEntity.created(uri).body(departmentService.saveDepartments(departmentDTOS));
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/department/save/all").toUriString());
+        return ResponseEntity.created(uri).body(service.saveDepartments(departmentDTOS));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/update/{id}")
     public ResponseEntity<DepartmentDTO> updateDepartment(@PathVariable("id") Long departmentId,
-                                                          @RequestBody DepartmentDTO departmentDTO) throws NotFoundException {
-        DepartmentDTO result = departmentService.updateDepartment(departmentId, departmentDTO);
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/departments/{id}").toUriString());
+                                                          @RequestBody DepartmentDTO department) throws NotFoundException {
+
+        DepartmentDTO result = service.updateDepartment(departmentId, department);
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/department/update/{id}").toUriString());
         return ResponseEntity.created(uri).body(result);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/delete/{id}")
     public String deleteDepartment(@PathVariable Long id) {
-        return departmentService.deleteDepartment(id);
+        return service.deleteDepartment(id);
     }
+
+
 }
