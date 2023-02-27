@@ -39,7 +39,7 @@ public class DepartmentController {
     }
 
 
-    @GetMapping("/findNAME/{name}")
+    @GetMapping("/find-name/{name}")
     public ResponseEntity<DepartmentDTO> findDepartmentByName(@PathVariable String name) throws NotFoundException {
 
         return ResponseEntity.ok().body(service.getDepartmentByName(name));

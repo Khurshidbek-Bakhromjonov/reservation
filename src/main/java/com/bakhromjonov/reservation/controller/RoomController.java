@@ -47,7 +47,7 @@ public class RoomController {
     }
 
 
-    @GetMapping("/findname")
+    @GetMapping("/find-name")
     public ResponseEntity<RoomDTO> findRoomByName(@RequestParam("name") String name) throws NotFoundException {
         return ResponseEntity.ok().body(service.getRoomByName(name));
     }
@@ -67,7 +67,7 @@ public class RoomController {
         return ResponseEntity.ok().body(service.getLastReservedRoom());
     }
 
-    @GetMapping("/mostbooked")
+    @GetMapping("/most-booked")
     public ResponseEntity<RoomDTO> getMostBookedRoom() throws NotFoundException {
         return ResponseEntity.ok().body(service.mostBookedRoom());
     }
