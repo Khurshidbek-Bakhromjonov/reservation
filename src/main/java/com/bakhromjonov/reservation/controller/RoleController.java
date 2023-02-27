@@ -4,7 +4,7 @@ import com.bakhromjonov.reservation.dto.RoleDTO;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.service.RoleService;
 import com.bakhromjonov.reservation.service.UserService;
-import lombok.Data;
+import com.bakhromjonov.reservation.utils.FormClass;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +25,12 @@ public class RoleController {
         return service.listAll();
     }
 
-    @GetMapping("/findID/{id}")
+    @GetMapping("/find-id/{id}")
     public RoleDTO findRoleById(@PathVariable Long id) throws NotFoundException {
         return service.getById(id);
     }
 
-    @GetMapping("/findNAME/{name}")
+    @GetMapping("/find-name/{name}")
     public RoleDTO findRoleByName(@PathVariable String name) {
         return service.getRoleByName(name);
     }
@@ -46,21 +46,15 @@ public class RoleController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleterole(@PathVariable Long id) {
+    public String deleteRole(@PathVariable Long id) {
         service.deleteRole(id);
         return "Deleted successfully";
     }
 
-    @PostMapping("/addToUser")
-    public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form) {
+    @PostMapping("/add-to-user")
+    public ResponseEntity<?> addRoleToUser(@RequestBody FormClass.RoleToUserForm form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
-    }
-
-    @Data
-    public static class RoleToUserForm {
-        private String username;
-        private String roleName;
     }
 
 }

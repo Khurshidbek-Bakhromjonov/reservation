@@ -34,7 +34,7 @@ public class BookingController {
         return ResponseEntity.ok().body(service.getUsersByBookingId(id));
     }
 
-    @GetMapping("/findCODE/{code}")
+    @GetMapping("/find-code/{code}")
     public BookingDTO findBookingByCode(@PathVariable String code) {
         return service.getBookingByCode(code);
     }

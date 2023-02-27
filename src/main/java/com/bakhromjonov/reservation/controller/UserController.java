@@ -53,7 +53,7 @@ public class UserController {
     }
 
 
-    @GetMapping("/findEMAIL/{email}")
+    @GetMapping("/find-email/{email}")
     public ResponseEntity<UserDTO> findUserByEmail(@PathVariable String email) {
         return ResponseEntity.ok().body(service.getUserByEmail(email));
     }
