@@ -3,7 +3,7 @@ package com.bakhromjonov.reservation.service;
 import com.bakhromjonov.reservation.entity.*;
 import com.bakhromjonov.reservation.repositorty.*;
 import com.bakhromjonov.reservation.security.SecurityParams;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

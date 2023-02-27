@@ -14,7 +14,7 @@ import com.bakhromjonov.reservation.repositorty.BookingRepository;
 import com.bakhromjonov.reservation.repositorty.DepartmentRepository;
 import com.bakhromjonov.reservation.repositorty.RoomRepository;
 import com.bakhromjonov.reservation.utils.FormClass;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

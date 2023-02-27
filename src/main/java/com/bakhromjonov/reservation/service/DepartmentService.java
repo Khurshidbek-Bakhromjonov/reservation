@@ -9,7 +9,7 @@ import com.bakhromjonov.reservation.mapper.DepartmentConvert;
 import com.bakhromjonov.reservation.mapper.RoomConvert;
 import com.bakhromjonov.reservation.repositorty.DepartmentRepository;
 import com.bakhromjonov.reservation.repositorty.RoomRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

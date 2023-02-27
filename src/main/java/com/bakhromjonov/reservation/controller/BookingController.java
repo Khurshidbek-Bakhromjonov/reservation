@@ -4,7 +4,7 @@ import com.bakhromjonov.reservation.dto.BookingDTO;
 import com.bakhromjonov.reservation.dto.UserDTO;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.service.BookingService;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
