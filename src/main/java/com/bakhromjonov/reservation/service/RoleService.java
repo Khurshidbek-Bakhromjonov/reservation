@@ -5,7 +5,7 @@ import com.bakhromjonov.reservation.entity.Role;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.mapper.RoleConvert;
 import com.bakhromjonov.reservation.repositorty.RoleRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

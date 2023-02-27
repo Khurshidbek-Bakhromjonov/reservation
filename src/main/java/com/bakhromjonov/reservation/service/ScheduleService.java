@@ -3,7 +3,7 @@ package com.bakhromjonov.reservation.service;
 import com.bakhromjonov.reservation.entity.Booking;
 import com.bakhromjonov.reservation.repositorty.BookingRepository;
 import com.bakhromjonov.reservation.repositorty.RoomRepository;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.MailException;
 import org.springframework.scheduling.annotation.Scheduled;

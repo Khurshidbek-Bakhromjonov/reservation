@@ -6,7 +6,7 @@ import com.bakhromjonov.reservation.entity.User;
 import com.bakhromjonov.reservation.exception.NotFoundException;
 import com.bakhromjonov.reservation.service.UserService;
 import com.bakhromjonov.reservation.utils.FormClass;
-import jakarta.validation.Valid;
+import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
